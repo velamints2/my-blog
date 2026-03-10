@@ -4,9 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yourusername.github.io',
-  // 如果部署到 GitHub Pages 子路径，取消下面注释并修改：
-  // base: '/repo-name',
+  site: 'https://velamints2.github.io',
+  base: '/my-blog',
   integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
