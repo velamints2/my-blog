@@ -4,6 +4,9 @@ dist/
 # dependencies
 node_modules/
 
+# Astro cache
+.astro/
+
 # environment
 .env
 .env.production
