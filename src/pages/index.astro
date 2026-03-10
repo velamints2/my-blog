@@ -8,20 +8,65 @@ const posts = (await getCollection('blog')).sort(
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<BaseLayout title="我的个人博客" description="记录技术与生活的个人空间">
-  <section class="hero">
-    <h1>欢迎来到我的博客</h1>
-    <p>在这里记录技术探索、学习笔记和生活感悟</p>
+<BaseLayout title="周相吉 的个人博客" description="连续创业者 | 南方科技大学 | Agent 时代修路人">
+
+  <!-- Profile Card -->
+  <section class="profile-card">
+    <div class="profile-avatar-wrap">
+      <img src={`${base}/avatar.png`} alt="周相吉" class="profile-avatar" />
+    </div>
+    <div class="profile-info">
+      <h1 class="profile-name">周相吉 <span class="profile-name-en">Zhou Xiangji</span></h1>
+      <p class="profile-bio">连续创业者 &nbsp;|&nbsp; 南方科技大学 &nbsp;|&nbsp; Agent 时代修路人</p>
+      <div class="profile-tags">
+        <span class="ptag">🦞 OpenClaw 代码贡献者</span>
+        <span class="ptag">🌱 Y-CLAP 气候领袖</span>
+        <span class="ptag">🤖 机器人 & Agent</span>
+        <span class="ptag">🌊 海印 OceanMint</span>
+      </div>
+      <div class="profile-links">
+        <a href="https://github.com/velamints2" target="_blank" rel="noopener" class="plink">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97.01 1.95.13 2.87.39 2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.13v3.17c0 .3.2.66.79.55C20.22 21.37 23.5 17.07 23.5 12 23.5 5.73 18.27.5 12 .5z"/></svg>
+          velamints2
+        </a>
+        <a href="mailto:1213717125@qq.com" class="plink">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          1213717125@qq.com
+        </a>
+      </div>
+    </div>
   </section>
 
-  <section>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--color-border);">
-      <h2 style="font-size: 1.3rem; font-weight: 700;">最新文章</h2>
-      <a href={`${base}/rss.xml`} class="rss-link">📡 RSS 订阅</a>
+  <!-- About Sections -->
+  <section class="about-sections">
+    <div class="about-block">
+      <h2>🏷️ 个人标签</h2>
+      <ul>
+        <li>🦞 <strong>OpenClaw 深度参与 / 代码贡献者</strong>（你的“虾”里有我的代码 LOL）</li>
+        <li>🚀 <strong>连续创业者</strong>：在深圳运营两家科技公司，聚焦 Agent 闭环执行。</li>
+        <li>🌱 <strong>气候领袖</strong>：Y-CLAP 青年气候领袖，入选联合国青年创业训练营（Youth Co:Lab）。</li>
+        <li>🏫 <strong>南科大在读</strong>：南方科技大学智能科学与技术本科生。</li>
+        <li>💼 <strong>职场实战</strong>：奇勃科技 CEO 助理，深入机器人与具身智能一线。</li>
+      </ul>
     </div>
+    <div class="about-block">
+      <h2>🚀 我在做什么？</h2>
+      <ul>
+        <li>🤖 <strong>机器人与 Agent</strong>：推动 AI 从“动嘴聊天”进化到“闭环执行”。通过 OpenClaw 等工具接管个人数字化流程，把“脏活累活”交给 AI，并赋能公司业务。</li>
+        <li>🌊 <strong>海印 OceanMint</strong>：将 AIoT 与海洋治理结合，利用技术手段守护深蓝。这是我作为“青年气候领袖”在公益与科技交叉点的实战。</li>
+        <li>💾 <strong>数字资产化</strong>：将业务 SOP “代码化”，把个人经验沉淠为可被 AI 调用的数字资产。</li>
+      </ul>
+    </div>
+  </section>
 
+  <!-- Latest Posts -->
+  <section class="latest-posts">
+    <div class="section-header">
+      <h2>最新文章</h2>
+      <a href={`${base}/blog`} class="view-all">查看全部 →</a>
+    </div>
     <div class="post-list">
-      {posts.map((post) => {
+      {posts.slice(0, 5).map((post) => {
         const formattedDate = post.data.pubDate.toLocaleDateString('zh-CN', {
           year: 'numeric',
           month: 'long',
@@ -48,4 +93,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       })}
     </div>
   </section>
+
 </BaseLayout>
