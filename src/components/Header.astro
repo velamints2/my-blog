@@ -1,0 +1,58 @@
+---
+const navLinks = [
+  { href: '/', label: '首页' },
+  { href: '/blog', label: '文章' },
+  { href: '/about', label: '关于' },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">📝 My Blog</a>
+    <nav class="site-nav">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[{ active: currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+        🌙
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  const theme = (() => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  })();
+
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('theme-toggle');
+    const updateIcon = () => {
+      toggle.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+    };
+    updateIcon();
+
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateIcon();
+    });
+  });
+</script>

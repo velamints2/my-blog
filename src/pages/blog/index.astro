@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="所有文章 - 我的个人博客" description="浏览所有博客文章">
+  <section>
+    <h1 class="posts-section-title">所有文章</h1>
+
+    <div class="post-list">
+      {posts.map((post) => {
+        const formattedDate = post.data.pubDate.toLocaleDateString('zh-CN', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+        return (
+          <article class="post-card">
+            <h3>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </h3>
+            <div class="post-meta">
+              <span>📅 {formattedDate}</span>
+            </div>
+            <p class="post-description">{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="post-tags">
+                {post.data.tags.map((tag: string) => (
+                  <span class="tag">#{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
