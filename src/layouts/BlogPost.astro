@@ -26,7 +26,7 @@ const formattedUpdatedDate = updatedDate
     <div class="article-header">
       <h1>{title}</h1>
       <div class="post-meta">
-        <span>📅 {formattedDate}</span>
+        <span>{formattedDate}</span>
         {formattedUpdatedDate && <span>（更新于 {formattedUpdatedDate}）</span>}
       </div>
       {tags && tags.length > 0 && (
